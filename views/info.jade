@@ -113,6 +113,11 @@ block content
                *Returns all unspent outputs (UTXOs) for given address, with scriptPubKey info *  
                *Note: amount values are in satoshis*  
                [#{address}/ext/getutxos/#{hashes.address}](/ext/getutxos/#{hashes.address})
+                    
+          *  **getmultiutxos (/ext/getmultiutxos/hash1,hash2,hash3,...)**  
+               *Returns all unspent outputs (UTXOs) for multiple given addresses, like getutxos would for a single address*  
+               *Note: the returned value is an array of unspent outputs*  
+               [#{address}/ext/getmultiutxos/#{hashes.address},DT9jUqzXFhRgf1qJFnMMJMeX19SQRBsPYu](/ext/getmultiutxos/#{hashes.address},DT9jUqzXFhRgf1qJFnMMJMeX19SQRBsPYu)
 
           ------
 
