@@ -86,6 +86,22 @@ app.use('/ext/getutxos/:hash', function(req,res){
   });	
 });
 
+// Get utxos of multiple addresses
+app.use('/ext/getmultiutxos/:hashes', function(req,res){
+    var asyncGet_address = Promise.promisify(db.get_address);
+    asyncGet_address.catch(function(error) {
+	res.send({ error: 'one or more addresses could not be found.'});    
+    });
+    var hashes = req.param('hashes').split(",");
+    Promise.all(hashes.map(asyncGet_address)).then(resultAddresses=> {
+    	var result = [];
+	for(var i = 0; i < resultAddresses.length; i++)
+	{
+	    result.push(resultAddresses[i].unspent);
+	}
+	res.send(result);
+    });
+});
 
 app.use('/ext/getbalance/:hash', function(req,res){
   db.get_address(req.param('hash'), function(address){
